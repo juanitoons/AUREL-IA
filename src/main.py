@@ -97,15 +97,17 @@ def main(page: ft.Page):
     ]
 
     RESPUESTAS_PREDETERMINADAS2 = [ 
-    "Es importante que recopiles cualquier evidencia que pueda respaldar tu denuncia, como mensajes, fotos o testigos.",
-    "¿En que fecha y a que hora sucedieron los hechos?",
-    "¿Quien realizo los hechos?",
-    "Hay algun partido politico involucrado",
-    "¿En donde sucedieron los hechos?",
-    "Puedes especificar la ubicacion",
-    "¿Como sucedieron los hechos?",
-    "¿Quieres hacer el documento de denuncia?"
+    "¿Quieres te ayude a llamar a emergencias o enviar tu ubicacion?"
     ]
+
+    #"Es importante que recopiles cualquier evidencia que pueda respaldar tu denuncia, como mensajes, fotos o testigos.",
+    #"¿En que fecha y a que hora sucedieron los hechos?",
+    #"¿Quien realizo los hechos?",
+    #"Hay algun partido politico involucrado",
+    #"¿En donde sucedieron los hechos?",
+    #"Puedes especificar la ubicacion",
+    #"¿Como sucedieron los hechos?",
+    #"¿Quieres hacer el documento de denuncia?"
 
 
     # Índice para controlar el recorrido de la lista de respuestas
