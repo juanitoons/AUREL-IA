@@ -172,7 +172,7 @@ def main(page: ft.Page):
             )
         )
 
-        input_mensaje = ft.TextField(hint_text="Escribe tu mensaje...", bgcolor=ft.colors.WHITE, border_radius=30, expand=True)
+        input_mensaje = ft.TextField(hint_text="Escribe tu mensaje...", bgcolor=ft.colors.WHITE,color=ft.colors.BLACK, border_radius=30, expand=True)
         boton_enviar = ft.IconButton(ft.icons.SEND, on_click=enviar_mensaje)
 
         return [
@@ -314,7 +314,7 @@ def main(page: ft.Page):
             )
         )
 
-        input_mensaje = ft.TextField(hint_text="Escribe tu mensaje...", bgcolor=ft.colors.WHITE, border_radius=30, expand=True)
+        input_mensaje = ft.TextField(hint_text="Escribe tu mensaje...", bgcolor=ft.colors.WHITE,color=ft.colors.BLACK, border_radius=30, expand=True)
         boton_enviar = ft.IconButton(ft.icons.SEND, on_click=enviar_mensaje)
 
         return [
