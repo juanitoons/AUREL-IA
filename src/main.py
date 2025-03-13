@@ -303,9 +303,7 @@ def main(page: ft.Page):
                         )
                     ],
                     expand=True
-                ),
-                bgcolor="#F1D7FF",
-                border_radius=15
+                )
             )
         ]
 
