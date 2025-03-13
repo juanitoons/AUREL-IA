@@ -178,7 +178,7 @@ def main(page: ft.Page):
         return [
             ft.AppBar(
                 leading=ft.IconButton(ft.icons.ARROW_BACK, on_click=regresar),
-                title=ft.Text("Conoce tus derechos", size=20, color=ft.colors.WHITE),
+                title=ft.Text(f"En caso de bloqueo recuerda los siguientes números:{numero_aleatorio}", size=20, color=ft.colors.WHITE),
                 bgcolor=ft.colors.PURPLE_300
             ),
             ft.Container(
@@ -320,7 +320,7 @@ def main(page: ft.Page):
         return [
             ft.AppBar(
                 leading=ft.IconButton(ft.icons.ARROW_BACK, on_click=regresar),
-                title=ft.Text("Conoce tus derechos", size=20, color=ft.colors.WHITE),
+                title=ft.Text(f"En caso de bloqueo recuerda los siguientes números:{numero_aleatorio}", size=20, color=ft.colors.WHITE),
                 bgcolor=ft.colors.PURPLE_300
             ),
             ft.Container(
