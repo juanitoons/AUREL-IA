@@ -27,7 +27,8 @@ def main(page: ft.Page):
         return [
             ft.AppBar(
                 title=ft.Text("AUREL-IA", color=ft.colors.WHITE),
-                bgcolor=ft.colors.PURPLE_300
+                bgcolor=ft.colors.PURPLE_300,
+                center_title=True
             ),
             ft.Container(
                 content=ft.Column(
@@ -57,14 +58,14 @@ def main(page: ft.Page):
                                 ft.Column(
                                     [
                                         ft.Container(
-                                            content=ft.Icon(ft.icons.WARNING_AMBER_ROUNDED, color=ft.colors.BLACK, size=60),
+                                            content=ft.Icon(ft.icons.EDIT_DOCUMENT, color=ft.colors.BLACK, size=60),
                                             width=90, height=90, bgcolor=ft.colors.WHITE, border_radius=20,
                                             alignment=ft.alignment.center,
                                             on_click=lambda _: ir_a_vista("/denuncia")
                                         ),
                                         ft.Text("Denuncia", text_align=ft.TextAlign.CENTER),
                                         ft.Container(
-                                            content=ft.Icon(ft.icons.EMERGENCY, color=ft.colors.BLACK, size=60),
+                                            content=ft.Icon(ft.icons.WARNING_AMBER_ROUNDED, color=ft.colors.BLACK, size=60),
                                             width=90, height=90, bgcolor=ft.colors.RED_400, border_radius=20,
                                             alignment=ft.alignment.center,
                                             on_click=cerrar_app
@@ -76,7 +77,8 @@ def main(page: ft.Page):
                             ],
                             alignment=ft.MainAxisAlignment.CENTER,
                             spacing=30
-                        )
+                        ),
+                        ft.Row([ft.Checkbox(label="Aceptar termino de privacidad", value=False)],alignment=ft.MainAxisAlignment.CENTER,height=100)
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
                 ),
@@ -101,7 +103,8 @@ def main(page: ft.Page):
     "Hay algun partido politico involucrado",
     "¿En donde sucedieron los hechos",
     "Puedes especificar la ubicacion",
-    "¿Como sucedieron los hechos?"
+    "¿Como sucedieron los hechos?",
+    "Aqui esta tu documento de denuncia: [Documento.pdf]"
     ]
 
 
@@ -192,7 +195,7 @@ def main(page: ft.Page):
                             border_radius=10
                         ),
                         ft.Container(
-                            content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.EMERGENCY, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app)], 
+                            content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.WARNING_AMBER_ROUNDED, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app)], 
                             alignment=ft.MainAxisAlignment.CENTER),
                             padding=10
                         )
@@ -255,10 +258,9 @@ def main(page: ft.Page):
         chat_mensajes = ft.ListView(expand=True, spacing=10, auto_scroll=True)
 
         def enviar_mensaje(e):
-            nonlocal indice_respuesta2  # Permite que el índice se mantenga en cada llamada
+            nonlocal indice_respuesta2  
 
             if input_mensaje.value.strip():
-                # Agregar mensaje del usuario
                 chat_mensajes.controls.append(
                     ft.Container(
                         content=ft.Text(input_mensaje.value, size=16, color=ft.colors.WHITE),
@@ -269,27 +271,50 @@ def main(page: ft.Page):
                     )
                 )
 
-                # Simular respuesta del chatbot recorriendo la lista
                 respuesta_chatbot = RESPUESTAS_PREDETERMINADAS2[indice_respuesta2]
-                indice_respuesta2 = (indice_respuesta2 + 1) % len(RESPUESTAS_PREDETERMINADAS2)
 
-                chat_mensajes.controls.append(
-                    ft.Column(
-                        [
-                            ft.Row([
-                                ft.Image(src="src/assets/flor2.png", width=30, height=30),
-                                ft.Text("AUREL-IA", size=16, color=ft.colors.WHITE)
-                            ]),
-                            ft.Container(
-                                content=ft.Text(respuesta_chatbot, size=16, color=ft.colors.BLACK),
-                                bgcolor=ft.colors.GREY_300,
-                                padding=10,
-                                border_radius=30,
-                                alignment=ft.alignment.center_left
-                            )
-                        ]
+                # Si es la respuesta 7, se crea un contenedor especial para el documento
+                if indice_respuesta2 == 7:
+                    chat_mensajes.controls.append(
+                        ft.Container(
+                            content=ft.Text(
+                                spans=[
+                                    ft.TextSpan("📄 Aquí está tu ", style={"color": ft.colors.BLACK, "size": 16}),
+                                    ft.TextSpan("documento de denuncia.pdf", 
+                                                style={
+                                                    "decoration": ft.TextDecoration.UNDERLINE, 
+                                                    "font_weight": ft.FontWeight.BOLD,
+                                                    "size":16
+                                                })
+                                ],
+                            ),
+                            bgcolor=ft.colors.GREEN,
+                            padding=10,
+                            border_radius=30,
+                            alignment=ft.alignment.center_left,
+                            on_click=lambda _: ir_a_vista("/denuncia_Doc")
+                        )
                     )
-                )
+                else:
+                    chat_mensajes.controls.append(
+                        ft.Column(
+                            [
+                                ft.Row([
+                                    ft.Image(src="src/assets/flor2.png", width=30, height=30),
+                                    ft.Text("AUREL-IA", size=16, color=ft.colors.WHITE)
+                                ]),
+                                ft.Container(
+                                    content=ft.Text(respuesta_chatbot, size=16, color=ft.colors.BLACK),
+                                    bgcolor=ft.colors.GREY_300,
+                                    padding=10,
+                                    border_radius=30,
+                                    alignment=ft.alignment.center_left
+                                )
+                            ]
+                        )
+                    )
+
+                indice_respuesta2 = (indice_respuesta2 + 1) % len(RESPUESTAS_PREDETERMINADAS2)
 
                 input_mensaje.value = ""
                 input_mensaje.update()
@@ -334,7 +359,7 @@ def main(page: ft.Page):
                             border_radius=10
                         ),
                         ft.Container(
-                            content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.EMERGENCY, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app)], 
+                            content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.WARNING_AMBER_ROUNDED, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app)], 
                             alignment=ft.MainAxisAlignment.CENTER),
                             padding=10
                         )
@@ -343,6 +368,50 @@ def main(page: ft.Page):
                 )
             )
         ]
+    
+    def vista_denuncia_doc():
+        def cambiar_estado(e, contenedor, texto):
+            contenedor.bgcolor = ft.colors.BLUE  # Cambia el color a azul
+            texto.value = "Descarga completada"  # Cambia el texto
+            e.page.update()
+        
+        texto_descarga = ft.Text("Descargar", color=ft.colors.WHITE, size=16)
+        contenedor_descarga = ft.Container(
+            content=texto_descarga,
+            bgcolor=ft.colors.GREEN,
+            padding=10,
+            border_radius=30,
+            on_click=lambda e: cambiar_estado(e, contenedor_descarga, texto_descarga)
+        )
+        
+        return [
+            ft.AppBar(
+                ft.IconButton(ft.Icons.ARROW_BACK_ROUNDED, on_click=regresar),
+                title=ft.Text("Descargar de documento"),
+                bgcolor=ft.colors.PURPLE_300
+            ),
+            ft.Container(
+                content=ft.Column(
+                    [
+                        ft.Container(
+                            content=ft.Row(
+                                [ft.Image(src=("src/assets/Doc.jpg"), width=250, height=150)],
+                                alignment=ft.MainAxisAlignment.CENTER
+                            ),
+                            bgcolor=ft.colors.PURPLE_300,
+                            padding=15,
+                            border_radius=20
+                        ),
+                        contenedor_descarga  # Contenedor de descarga
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                ),
+                expand=True,
+                alignment=ft.alignment.center
+            )
+        ]
+
 
 
     # Función para manejar cambios de ruta
@@ -357,6 +426,8 @@ def main(page: ft.Page):
             page.views.append(ft.View(route=page.route, bgcolor=page.bgcolor, controls=vista_instituciones()))
         elif page.route == "/denuncia":
             page.views.append(ft.View(route=page.route, bgcolor=page.bgcolor, controls=vista_denuncia()))
+        elif page.route == "/denuncia_Doc":
+            page.views.append(ft.View(route=page.route, bgcolor=page.bgcolor, controls=vista_denuncia_doc()))
         
         page.update()
 
