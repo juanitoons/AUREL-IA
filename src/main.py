@@ -101,10 +101,10 @@ def main(page: ft.Page):
     "¿En que fecha y a que hora sucedieron los hechos?",
     "¿Quien realizo los hechos?",
     "Hay algun partido politico involucrado",
-    "¿En donde sucedieron los hechos",
+    "¿En donde sucedieron los hechos?",
     "Puedes especificar la ubicacion",
     "¿Como sucedieron los hechos?",
-    "Aqui esta tu documento de denuncia: [Documento.pdf]"
+    "¿Quieres hacer el documento de denuncia?"
     ]
 
 
@@ -176,7 +176,7 @@ def main(page: ft.Page):
         )
 
         input_mensaje = ft.TextField(hint_text="Escribe tu mensaje...", bgcolor=ft.colors.WHITE,color=ft.colors.BLACK, border_radius=30, expand=True)
-        boton_enviar = ft.IconButton(ft.icons.SEND, on_click=enviar_mensaje)
+        boton_enviar = ft.IconButton(ft.icons.SEND,bgcolor=ft.colors.PURPLE_300,icon_color=ft.colors.WHITE, on_click=enviar_mensaje)
 
         return [
             ft.AppBar(
@@ -340,7 +340,7 @@ def main(page: ft.Page):
         )
 
         input_mensaje = ft.TextField(hint_text="Escribe tu mensaje...", bgcolor=ft.colors.WHITE,color=ft.colors.BLACK, border_radius=30, expand=True)
-        boton_enviar = ft.IconButton(ft.icons.SEND, on_click=enviar_mensaje)
+        boton_enviar = ft.IconButton(ft.icons.SEND,bgcolor=ft.colors.PURPLE_300,icon_color=ft.colors.WHITE, on_click=enviar_mensaje)
 
         return [
             ft.AppBar(
