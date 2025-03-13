@@ -17,7 +17,7 @@ def main(page: ft.Page):
         page.route = "/"
         page.update()
 
-    page.window.prevent_close = True
+    page.window.prevent_close = False
 
     def cerrar_app(e):
         page.window.destroy()
