@@ -262,7 +262,8 @@ def main(page: ft.Page):
                                 border_radius=10
                             ),
                             ft.Container(
-                                content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.WARNING_AMBER_ROUNDED, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app)], 
+                                content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.WARNING_AMBER_ROUNDED, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app)         
+                                                ], 
                                 alignment=ft.MainAxisAlignment.CENTER),
                                 padding=10
                             )
@@ -415,6 +416,20 @@ def main(page: ft.Page):
 
         input_mensaje = ft.TextField(hint_text="Escribe tu mensaje...", bgcolor=ft.colors.WHITE,color=ft.colors.BLACK, border_radius=30, expand=True)
         boton_enviar = ft.IconButton(ft.icons.SEND,bgcolor=ft.colors.PURPLE_300,icon_color=ft.colors.WHITE, on_click=enviar_mensaje)
+        boton_mas = ft.Container(
+                        content=ft.PopupMenuButton(
+                            items=[
+                                ft.PopupMenuItem(text="Documento", on_click=lambda e: print("Documento seleccionado")),
+                                ft.PopupMenuItem(text="Imagen", on_click=lambda e: print("Imagen seleccionada")),
+                                ft.PopupMenuItem(text="Video", on_click=lambda e: print("Video seleccionado"))
+                            ],
+                            icon=ft.icons.ADD,
+                            icon_color=ft.colors.WHITE,
+                            menu_position=ft.PopupMenuPosition.OVER
+                        ),
+                        bgcolor=ft.colors.GREEN_400,
+                        border_radius=60
+                    )
 
         return ft.View(
             route="/denuncia",
@@ -435,7 +450,7 @@ def main(page: ft.Page):
                             border_radius=10
                         ),
                         ft.Container(
-                            content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.WARNING_AMBER_ROUNDED, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app)], 
+                            content=ft.Row([input_mensaje, boton_enviar, ft.IconButton(icon=ft.icons.WARNING_AMBER_ROUNDED, icon_color=ft.colors.BLACK, bgcolor=ft.colors.RED_400, on_click=cerrar_app),boton_mas], 
                             alignment=ft.MainAxisAlignment.CENTER),
                             padding=10
                         )
